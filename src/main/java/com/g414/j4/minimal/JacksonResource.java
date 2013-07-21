@@ -27,7 +27,7 @@ public class JacksonResource {
 
     @GET
     @Produces( { MediaType.APPLICATION_JSON })
-    @Path("/awesome/{who}")
+    @Path("awesome/{who}")
     public Response sayOtherGreeting(@PathParam("who") String name) {
         ObjectNode result = JsonNodeFactory.instance.objectNode();
         result.put("name", name);
