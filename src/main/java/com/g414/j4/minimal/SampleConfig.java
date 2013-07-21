@@ -36,10 +36,12 @@ public class SampleConfig extends GuiceServletContextListener {
                 Map<String, String> initParams = new HashMap<String, String>();
                 initParams.put("com.sun.jersey.config.feature.Trace",
                         "true");
+                initParams.put("com.sun.jersey.api.json.POJOMappingFeature", "true");
                 serve("*").with(
                         GuiceContainer.class,
                         initParams);
             }
         });
     }
+
 }

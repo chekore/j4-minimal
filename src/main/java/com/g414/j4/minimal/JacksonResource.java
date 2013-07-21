@@ -5,7 +5,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.node.JsonNodeFactory;
+import org.codehaus.jackson.node.ObjectNode;
 
 /**
  * The Jersey Jackson Resource itself. Note that this class is a POJO - it does
@@ -19,6 +23,15 @@ public class JacksonResource {
     @Path("{who}")
     public Greeting sayGreeting(@PathParam("who") String name) {
         return new Greeting(name);
+    }
+
+    @GET
+    @Produces( { MediaType.APPLICATION_JSON })
+    @Path("/awesome/{who}")
+    public Response sayOtherGreeting(@PathParam("who") String name) {
+        ObjectNode result = JsonNodeFactory.instance.objectNode();
+        result.put("name", name);
+        return Response.ok().entity(result).build();
     }
 
     /**
